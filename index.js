@@ -111,6 +111,14 @@ const getFaucet = (proxy, address, captcha) => new Promise ((resolve, reject) =>
                     captcha = await getResultCaptcha(apiKey, idCaptcha.request)
                 }while(captcha.status == 0 || !captcha);
                 console.log("[!] Captcha was Found!");
+                
+                const getProxy = fs.readFileSync('./proxy.txt','utf-8');
+                const splitProxy = getProxy.split(`\r\n`);
+                console.log(splitProxy)
+                const randProxy = Math.floor(splitProxy.length * Math.random());
+                const proxy = `socks5h://${splitProxy[randProxy]}`
+                console.log(proxy);
+
                 const faucet = await getFaucet(proxy, address, captcha.request)
                 if(faucet.code == 201){
                     console.log(`[!] Faucet for ${address} was Success!`)
