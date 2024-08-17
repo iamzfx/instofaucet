@@ -150,5 +150,8 @@ const getFaucet = (proxy, address, captcha) => new Promise ((resolve, reject) =>
         }catch(error){
             console.log(error.toString())
         }   
+    }else {
+        console.log("[!] Pilihan ada tidak ada!");
+        process.exit()
     }
 })();
